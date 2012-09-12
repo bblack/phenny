@@ -172,14 +172,15 @@ class Phenny(irc.Bot):
             s = unicode.__new__(cls, text)
             s.sender = origin.sender
             s.nick = origin.nick
+            s.host = origin.host
             s.event = event
             s.bytes = bytes
             s.match = match
             s.group = match.group
             s.groups = match.groups
             s.args = args
-            s.admin = origin.nick in self.config.admins
-            s.owner = origin.nick == self.config.owner
+            s.admin = origin.host.lower() in self.config.admins
+            s.owner = origin.host.lower() == self.config.owner
             return s
 
       return CommandInput(text, origin, bytes, match, event, args)
