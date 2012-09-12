@@ -7,6 +7,15 @@ Licensed under the Eiffel Forum License 2.
 http://inamidst.com/phenny/
 """
 
+def nick(phenny, input):
+    """ Change nick """
+    if input.sender.startswith('#'): return
+    if input.admin:
+        phenny.write(['NICK'], input.group(2))
+nick.commands = ['nick']
+nick.priority = 'low'
+nick.example = '.nick brian'
+
 def join(phenny, input): 
    """Join the specified channel. This is an admin-only command."""
    # Can only be done in privmsg by an admin
