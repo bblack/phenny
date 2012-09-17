@@ -86,6 +86,24 @@ class Bot(asynchat.async_chat):
       except KeyboardInterrupt: 
          sys.exit()
 
+   def nickhammer(self):
+      # by Brian
+      while True:
+         if pastDeadline():
+            self.write( ('NICK','blanket') )
+         time.sleep(10)
+   
+   # Copied from modules/onjoin.py for blanket's nickhammer:
+   def pastDeadline():
+      # Returns true if past deadline, false if not
+      f = file('onjoin-deadline')
+      deadline = float(f.read())
+      f.close()
+      if time.time() > deadline:
+         return True
+      else:
+         return False
+
    def handle_connect(self): 
       if self.verbose: 
          print >> sys.stderr, 'connected!'
