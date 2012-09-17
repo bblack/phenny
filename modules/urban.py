@@ -21,9 +21,11 @@ def get_def(word):
    entries_tbl = soup.find('table', {'id': 'entries'})
    if entries_tbl == None:
       return ("Found no entries for " + word)
-   ret_word = entries_tbl.find('td', {'class': 'word'}).find(text=True).replace('\n', '')
-   if ret_word == None or ret_word == '':
-      return ("Found no entries for " + word) # I think this works
+   word_td = entries_tbl.find('td', {'class': 'word'})
+   if word_td.find('a'):
+      # If there are only approximate matches, site lists them as links to the proper page
+      return ("Found no entries for " + word + ", but some were close.")
+   ret_word = word_td.find(text=True).replace('\n', '')
    ret_def = entries_tbl.find('div', {'class': 'definition'}).findAll(text=True)
    ret_def = ' '.join(ret_def)
    ret_def = ret_def[:300]
