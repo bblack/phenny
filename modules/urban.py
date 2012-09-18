@@ -33,7 +33,7 @@ def get_def(word):
    ret_word = word_td.find(text=True).replace('\n', '')
    ret_def = entries_tbl.find('div', {'class': 'definition'}).findAll(text=True)
    ret_def = ' '.join(ret_def)
-   ret_def = ret_def[:300]
+   ret_def = (ret_def[:300] + '...') if len(ret_def) > 300 else ret_def
    return htmlentitydecode(ret_word + ': ' + ret_def)
                                                    
 def urban(phenny, input):
