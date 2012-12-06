@@ -17,7 +17,9 @@ def score(abv):
 		raise Exception("Couldn't find a team with that abbreviation. Abbreviations are 3 letters (sometimes 2) that name the team's hometown.")
 	game_el = abv_el.parent.parent.parent.parent
 	game_text_els = game_el.findAll(text=True)
-	out_text = ' '.join(game_text_els)
+	# Have to specify all css classes. Assuming this is fixed in bs4
+	day = game_el.findParent('div', {'class': 'daysgames'}).find('div', {'class': 'day-head column-head'}).text
+	out_text = day + ' ' + ' '.join(game_text_els)
 	return out_text
 
 def get_score(phenny, input):
