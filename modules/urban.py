@@ -27,7 +27,7 @@ def get_def(word):
    if entries_tbl == None:
       return ("Found no entries for " + word)
    word_td = entries_tbl.find('td', {'class': 'word'})
-   ret_word = word_td.find(text=True).replace('\n', '')
+   ret_word = word_td.find('span').text.replace('\n', '')
    ret_def = entries_tbl.find('div', {'class': 'definition'}).findAll(text=True)
    ret_def = ' '.join(ret_def)
    ret_def = (ret_def[:300] + '...') if len(ret_def) > 300 else ret_def
