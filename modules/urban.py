@@ -27,9 +27,6 @@ def get_def(word):
    if entries_tbl == None:
       return ("Found no entries for " + word)
    word_td = entries_tbl.find('td', {'class': 'word'})
-   if word_td.find('a'):
-      # If there are only approximate matches, site lists them as links to the proper page
-      return ("Found no entries for " + word + ", but some were close.")
    ret_word = word_td.find(text=True).replace('\n', '')
    ret_def = entries_tbl.find('div', {'class': 'definition'}).findAll(text=True)
    ret_def = ' '.join(ret_def)
